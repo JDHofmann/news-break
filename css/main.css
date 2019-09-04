@@ -110,6 +110,7 @@ a {
 .search-input {
   grid-column: 4/7;
   background-color: #ededed;
+  padding: 0 1em;
 }
 .search-parameter {
   padding: 1em;
@@ -122,4 +123,13 @@ a {
   width: 90%;
   max-width: 3em;
   height: auto;
+}
+.more-stories {
+  visibility: hidden;
+  text-align: center;
+  padding: 1em;
+  box-shadow: 2px 0 5px #c9c9c9;
+}
+.more-stories:hover {
+  cursor: pointer;
 }

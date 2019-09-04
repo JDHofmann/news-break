@@ -1,6 +1,6 @@
 'use strict';
 const newsApiKey = "22e6ec438e804e658da00de572c65e51";
-const headlinesUrl = 'https://newsapi.org/v2/top-headlines?pageSize=3&country=us';
+const headlinesUrl = 'https://newsapi.org/v2/top-headlines?pageSize=6&country=us';
 const specificHeadlinesUrl = 'https://newsapi.org/v2/top-headlines';
 const searchURL = 'https://newsapi.org/v2/everything';
 const searchTerm = '';
@@ -83,9 +83,28 @@ function displayResults(responseJson) {
       `<li><a target="_blank" href="${responseJson.articles[i].url}"><p>${responseJson.articles[i].source.name}</p><h3>${responseJson.articles[i].title}</h3><img class="article-thumbnail" src='${responseJson.articles[i].urlToImage}'>
       </a></li>`
     )};
+    $('.more-stories').css('visibility', 'visible');
+    watchMoreStories(responseJson);
     // add back in for tablet size
     // <p>${responseJson.articles[i].description}</p>
 };
+
+function watchMoreStories(responseJson) {
+  $('.more-stories').on('click', function(event) {
+    $('.results-list').append(
+      `<li><a target="_blank" href="${responseJson.articles[3].url}"><p>${responseJson.articles[3].source.name}</p><h3>${responseJson.articles[3].title}</h3><img class="article-thumbnail" src='${responseJson.articles[3].urlToImage}'>
+      </a></li>`);
+    for (let i = 4; i < 7 ; i++){
+      if ( i % 3 === 0 ) {
+        getCat();
+      } else
+      $('.results-list').append(
+        `<li><a target="_blank" href="${responseJson.articles[i].url}"><p>${responseJson.articles[i].source.name}</p><h3>${responseJson.articles[i].title}</h3><img class="article-thumbnail" src='${responseJson.articles[i].urlToImage}'>
+        </a></li>`
+      )};
+      $('.more-stories').css('visibility', 'hidden');
+  })
+}
 
 function loadHeadlines(){
   $('.search-parameter').html('Top Headlines');
@@ -113,7 +132,7 @@ function loadSpecificHeadlines(categorySelected){
   const params = {
     language: "en",
     country: 'us',
-    pageSize: 3,
+    pageSize: 6,
     category: categorySelected,
     // for menu links
     };
