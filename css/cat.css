@@ -1,0 +1,8 @@
+.catImg {
+  margin: 1em;
+  width: calc(100% - 2em);
+  height: calc(100% - 2em);
+  /* max-height: 30em;
+  max-width: 30em; */
+
+}

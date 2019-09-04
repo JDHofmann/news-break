@@ -6,24 +6,51 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>News Break</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/cat.css">
+    <!--
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  -->
 </head>
 <body>
-    <div class="container">
-        <form class="search-form">
-            <input type="submit" class="menu-btn" value="=">
-            <h2 class="logo">News Break</h2>
-            <input type="text" name="search-term" class="search-input">
-            <input type="submit" value="Q">
-        </form>
-        <section class="search-results">
-          <h1 class="search-parameter">Headlines</h1>
-          <ul class="results-list">
+  <header>
+    <form class="search-form">
+        <div class="menu-btn"></div>
+        <nav>
+          <ul class="menu-top">
+            <li class="logo">News Break</li>
+            <li class="menu-item">Sign In / Sign Up</li>
+            <label class="menu-item" for="break-options">Break Options</label>
+            <select class="break-options menu-item" name="break-options">
+              <option value="all">All (default)</option>
+              <option value="cats">Cats</option>
+              <option value="ron">Ron Swanson</option>
+            </select>
           </ul>
-        </section>
-        <p id="js-error-message" class="error-message"></p>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="js/main.js"></script>
+          <ul>
+            <li class="menu-item top">Top Headlines</li>
+            <li class="menu-item business">Business</li>
+            <li class="menu-item technology">Technology</li>
+            <li class="menu-item health">Health</li>
+            <li class="menu-item sports">Sports</li>
+            <li class="menu-item entertainment">Entertainment</li>
+          </ul>
+        </nav>
+        <h2 class="logo">News Break</h2>
+        <input type="text" name="search-term" class="search-input">
+        <input class="search"type="submit" value="">
+    </form>
+  </header>
+  <section class="results">
+    <h1 class="search-parameter"></h1>
+    <ul class="results-list">
+    </ul>
+    <p id="js-error-message" class="error-message"></p>
+  </section>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>-->
+  <script src="js/jQuery.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/catApi.js"></script>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
