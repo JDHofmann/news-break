@@ -16,16 +16,19 @@
     <form class="search-form">
         <div class="menu-btn"></div>
         <nav>
-          <ul class="menu-top">
-            <li class="logo">News Break</li>
-            <li class="menu-item">Sign In / Sign Up</li>
+          <div class="menu-top">
+            <ul>
+              <li class="logo menu-logo"></li>
+              <li class="menu-item">Sign In / Sign Up</li>
+            </ul>
             <label class="menu-item" for="break-options">Break Options</label>
             <select class="break-options menu-item" name="break-options">
               <option value="all">All (default)</option>
               <option value="cats">Cats</option>
               <option value="ron">Ron Swanson</option>
             </select>
-          </ul>
+
+          </div>
           <ul>
             <li class="menu-item top">Top Headlines</li>
             <li class="menu-item business">Business</li>
@@ -35,9 +38,9 @@
             <li class="menu-item entertainment">Entertainment</li>
           </ul>
         </nav>
-        <h2 class="logo">News Break</h2>
+        <div class="logo"></div>
         <input type="text" name="search-term" class="search-input">
-        <input class="search"type="submit" value="">
+        <input class="search" type="submit" value="">
     </form>
   </header>
   <section class="results">
@@ -51,7 +54,6 @@
   <script src="js/jQuery.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/catApi.js"></script>
-
   <script src="js/main.js"></script>
 </body>
 </html>

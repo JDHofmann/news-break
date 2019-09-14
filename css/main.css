@@ -101,16 +101,23 @@ a {
 }
 .logo {
   display: grid;
-  font-size: 1em;
-  text-align: center;
+  background-image: url(img/newsbreaklogo2.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 135%;
+  height: auto;
   grid-column: 2/4;
-  align-items: center;
-  padding-top: .3em;
+  margin-top: .25em;
+}
+.menu-logo {
+  height: 2em;
 }
 .search-input {
   grid-column: 4/7;
   background-color: #ededed;
   padding: 0 1em;
+  font-size: 1.25em;
+  margin-top: .2em;
 }
 .search-parameter {
   padding: 1em;
@@ -123,6 +130,7 @@ a {
   width: 90%;
   max-width: 3em;
   height: auto;
+  margin: 0 auto;
 }
 .more-stories {
   visibility: hidden;
@@ -132,4 +140,12 @@ a {
 }
 .more-stories:hover {
   cursor: pointer;
+}
+
+/* TABLET SIZING */
+@media only screen and (min-height: 1024px) {
+  form {
+    height: 3em;
+  }
+  nav 
 }

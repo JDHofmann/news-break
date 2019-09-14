@@ -1,9 +1,10 @@
 'use strict';
 const newsApiKey = "22e6ec438e804e658da00de572c65e51";
-const headlinesUrl = 'https://newsapi.org/v2/top-headlines?pageSize=6&country=us';
+const headlinesUrl = 'https://newsapi.org/v2/top-headlines?pageSize=12&country=us';
 const specificHeadlinesUrl = 'https://newsapi.org/v2/top-headlines';
 const searchURL = 'https://newsapi.org/v2/everything';
 const searchTerm = '';
+
 // let categorySelected = '';
 
 $('.top').on('click', function(event) {
@@ -38,6 +39,7 @@ $('.entertainment').on('click', function(event) {
   removeMenu();
 })
 
+
 function formatQueryParams(params) {
   const queryItems = Object.keys(params)
     .map(key => `${key}=${params[key]}`)
@@ -67,24 +69,33 @@ function getNews(query) {
     .catch( err => {
       $('.error-message').text(`Something went wrong: ${err.message}`);
     });
+
 }
 
+
+
 function displayResults(responseJson) {
-  // console.log(responseJson);
+  let storyCounter = 1;
   $('.results-list').empty();
   $('.results-list').append(
     `<li><a target="_blank" href="${responseJson.articles[0].url}"><p>${responseJson.articles[0].source.name}</p><h3>${responseJson.articles[0].title}</h3><img class="article-thumbnail" src='${responseJson.articles[0].urlToImage}'>
     </a></li>`);
-  for (let i = 1; i < 4 ; i++){
-    if ( i % 3 === 0 ) {
-      getCat();
-    } else
+
+  for (let i = 1; i < 15 ; i++){
+    if ( (i + 1) % 4 === 0 ) {
+      //displayCatResults(catJson);
+
+    } else {
     $('.results-list').append(
-      `<li><a target="_blank" href="${responseJson.articles[i].url}"><p>${responseJson.articles[i].source.name}</p><h3>${responseJson.articles[i].title}</h3><img class="article-thumbnail" src='${responseJson.articles[i].urlToImage}'>
+      `<li><a target="_blank" href="${responseJson.articles[storyCounter].url}"><p>${responseJson.articles[storyCounter].source.name}</p><h3>${responseJson.articles[storyCounter].title}</h3><img class="article-thumbnail" src='${responseJson.articles[storyCounter].urlToImage}'>
       </a></li>`
-    )};
-    $('.more-stories').css('visibility', 'visible');
-    watchMoreStories(responseJson);
+    );
+    storyCounter++;
+    }
+  }
+    console.log('`displayResults` has run');
+    // $('.more-stories').css('visibility', 'visible');
+    // watchMoreStories(responseJson);
     // add back in for tablet size
     // <p>${responseJson.articles[i].description}</p>
 };
@@ -108,7 +119,6 @@ function watchMoreStories(responseJson) {
 
 function loadHeadlines(){
   $('.search-parameter').html('Top Headlines');
-
   const options = {
     headers: new Headers({
       "X-Api-Key": newsApiKey})
@@ -122,7 +132,7 @@ function loadHeadlines(){
     })
     .then(responseJson => displayResults(responseJson))
     .catch( err => {
-      $('.error-message').text(`Something went wrong: ${err.message}`);
+      $('.error-message').text(`Something in loadHeadlines went wrong: ${err.message}`);
     });
     // console.log(url);
 }
@@ -151,9 +161,8 @@ function loadSpecificHeadlines(categorySelected){
     })
     .then(responseJson => displayResults(responseJson))
     .catch( err => {
-      $('.error-message').text(`Something went wrong: ${err.message}`);
+      $('.error-message').text(`Something in loadSpecificHeadlines went wrong: ${err.message}`);
     });
-    // console.log(url);
 }
 
 
@@ -190,6 +199,11 @@ function watchMenu() {
   })
 }
 
+async function getAlternate() {
+  const response = await catRequest();
+}
+
 $(watchMenu());
 $(loadHeadlines());
 $(watchForm());
+$(getAlternate());
