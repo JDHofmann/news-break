@@ -4,7 +4,8 @@
   height: calc(100% - 2em);
   /* max-height: 30em;
   max-width: 30em; */
-
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 1em;
 }
 .Swanson {
   background-image: url('https://static.parade.com/wp-content/uploads/2013/10/tv-show-best-boss-ron-swanson.jpg');
@@ -17,7 +18,7 @@
 }
 .ron-quote {
   padding: 5%;
-  margin: 0 5%;
+  margin: 0 5% 1em 5%;
   text-align: center;
   font-family: 'Raleway', sans-serif;
   text-transform: uppercase;
@@ -26,4 +27,5 @@
   font-weight: lighter;
   color: #fff;
   background-color: #1a1a1a;
+  border-bottom: 1px solid #e0e0e0;
 }

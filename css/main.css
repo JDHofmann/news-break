@@ -47,11 +47,6 @@ nav {
   box-shadow: 2px 2px 2px #c9c9c9;
   padding: .1em .2em;
 }
-/*
-.results {
-  margin-top: 2.25em;
-}
-*/
 input {
   background-color: #fff;
   border: none;
@@ -80,24 +75,32 @@ a {
   min-height: 8em;
   border-bottom: 1px solid #e0e0e0;
 }
-.results-list li p, h3 {
+.results-list li h5, h3, p {
   grid-column: 1/4;
   justify-content: center;
 }
-.results-list li p {
+.results-list li h5 {
   padding: 1em 0 0;
   font-size: .8em;
 }
 .results-list li h3 {
   padding: .5em 0;
   font-size: 1.2em;
+  line-height: 1.4em;
+}
+.results-list p {
+  font-size: 1em;
+  line-height: 1.2em;
+  padding-bottom: 1em;
+  display: none;
 }
 .results-list .article-thumbnail {
   display: grid;
-  width: 4em;
+  width: 7em;
   height: auto;
   grid-column: 4/5;
   justify-content: center;
+  padding: 0 0 .5em .5em;
 }
 .logo {
   display: grid;
@@ -147,5 +150,25 @@ a {
   form {
     height: 3em;
   }
-  nav 
+  .menu-logo {
+    height: 3em;
+  }
+  .menu-item {
+    margin: 1em;
+    font-size: 1.15em;
+  }
+  .search-parameter {
+    padding: 2em;
+    font-size: 1.1em;
+  }
+  .results-list {
+    margin: 1em 2em;
+  }
+  .results-list .article-thumbnail {
+    padding: 0 0 1em 1em;
+    width: 10em;
+  }
+  .results-list p {
+    display: block;
+  }
 }

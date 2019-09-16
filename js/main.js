@@ -82,7 +82,7 @@ async function displayResults(responseJson) {
   let storyCounter = 1;
   $('.results-list').empty();
   $('.results-list').append(
-    `<li><a target="_blank" href="${responseJson.articles[0].url}"><p>${responseJson.articles[0].source.name}</p><h3>${responseJson.articles[0].title}</h3><img class="article-thumbnail" src='${responseJson.articles[0].urlToImage}'>
+    `<li><a target="_blank" href="${responseJson.articles[0].url}"><h5>${responseJson.articles[0].source.name}</h5><h3>${responseJson.articles[0].title}</h3><img class="article-thumbnail" src='${responseJson.articles[0].urlToImage}'><p>${responseJson.articles[0].description}</p>
     </a></li>`);
 
   for (let i = 1; i < 16 ; i++){
@@ -90,7 +90,7 @@ async function displayResults(responseJson) {
       await alternateRequest();
     } else {
     $('.results-list').append(
-      `<li><a target="_blank" href="${responseJson.articles[storyCounter].url}"><p>${responseJson.articles[storyCounter].source.name}</p><h3>${responseJson.articles[storyCounter].title}</h3><img class="article-thumbnail" src='${responseJson.articles[storyCounter].urlToImage}'>
+      `<li><a target="_blank" href="${responseJson.articles[storyCounter].url}"><h5>${responseJson.articles[storyCounter].source.name}</h5><h3>${responseJson.articles[storyCounter].title}</h3><p>${responseJson.articles[storyCounter].description}</p><img class="article-thumbnail" src='${responseJson.articles[storyCounter].urlToImage}'>
       </a></li>`
     );
     storyCounter++;
