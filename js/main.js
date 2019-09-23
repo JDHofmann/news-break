@@ -5,6 +5,8 @@ const specificHeadlinesUrl = 'https://newsapi.org/v2/top-headlines';
 const searchURL = 'https://newsapi.org/v2/everything';
 const searchTerm = '';
 let pageNumber = 1;
+let breaksSelector = $('.break-options').val();
+let toggleCat = true, toggleRon = true;
 // let categorySelected = '';
 
 $('.top').on('click', function(event) {
@@ -89,6 +91,7 @@ async function displayResults(responseJson) {
     if ( (i + 1) % 4 === 0 ) {
       await alternateRequest();
     } else {
+      //console.log('loading story');
     $('.results-list').append(
       `<li><a target="_blank" href="${responseJson.articles[storyCounter].url}"><h5>${responseJson.articles[storyCounter].source.name}</h5><h3>${responseJson.articles[storyCounter].title}</h3><p>${responseJson.articles[storyCounter].description}</p><img class="article-thumbnail" src='${responseJson.articles[storyCounter].urlToImage}'>
       </a></li>`
@@ -96,7 +99,7 @@ async function displayResults(responseJson) {
     storyCounter++;
     }
   }
-    // console.log('`displayResults` has run');
+    //console.log('`displayResults` has run');
     $('.more-stories').css('visibility', 'visible');
     watchMoreStories();
     // add back in for tablet size
@@ -203,12 +206,43 @@ function watchMenu() {
     watchOpenMenu();
   })
 }
-/*
-async function getAlternate() {
-  const response = await catRequest();
+function watchBreaksSelector() {
+  if ( breaksSelector === 'all') {
+    for ( let i = 0; i < STORE.length; i++) {
+      STORE[i].get = true;
+    }
+  }
+  else if ( breaksSelector === 'cats') {
+    STORE[0].get = true;
+    let current = STORE[0];
+    let storeWithoutCurrent = STORE.filter( function(x) {
+      return x !== current
+    });
+    for ( let i = 0; i < storeWithoutCurrent.length; i++) {
+      storeWithoutCurrent[i].get = false;
+    }
+  }
+  else if ( breaksSelector === 'ron') {
+    STORE[1].get = true;
+    let current = STORE[1];
+    let storeWithoutCurrent = STORE.filter( function(x) {
+      return x !== current
+    });
+    for ( let i = 0; i < storeWithoutCurrent.length; i++) {
+      storeWithoutCurrent[i].get = false;
+    }
+  }
+  // location.reload();
+  //console.log(breaksSelector);
+  //console.log(STORE);
+  return STORE;
 }
-*/
+
+$('.break-options').change(function() {
+  location.reload();
+})
+
+$(watchBreaksSelector());
 $(watchMenu());
 $(loadHeadlines());
 $(watchForm());
-/* $(getAlternate());*/
