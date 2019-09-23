@@ -122,6 +122,15 @@ a {
   font-size: 1.25em;
   margin-top: .2em;
 }
+.theme {
+  text-align: center;
+  padding: .5em;
+  letter-spacing: .1em;
+  font-style: italic;
+  color: #858585;
+  font-family: monospace;
+
+}
 .search-parameter {
   padding: 1em;
 }
@@ -144,14 +153,16 @@ a {
 .more-stories:hover {
   cursor: pointer;
 }
-
-/* TABLET SIZING */
-@media only screen and (min-height: 1024px) {
+@media only screen and (min-width: 768px) {
   form {
     height: 3em;
   }
+  nav {
+    width: 40vw;
+  }
   .menu-logo {
     height: 3em;
+    width: 70%;
   }
   .menu-item {
     margin: 1em;
@@ -160,6 +171,18 @@ a {
   .search-parameter {
     padding: 2em;
     font-size: 1.1em;
+  }
+}
+
+/* TABLET SIZING */
+@media only screen and (min-height: 1024px) {
+  nav {
+    width: 40vw;
+  }
+  .theme {
+    font-size: 1em;
+    letter-spacing: .2em;
+    padding: 1em;
   }
   .results-list {
     margin: 1em 2em;
