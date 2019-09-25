@@ -7,7 +7,8 @@ const searchTerm = '';
 let pageNumber = 1;
 let breaksSelector = $('.break-options').val();
 let toggleCat = true, toggleRon = true;
-// let categorySelected = '';
+let breakSelected;
+// $('.break-options').val(breaksSelected);
 
 $('.top').on('click', function(event) {
   let categorySelected = 'Top Headlines';
@@ -239,7 +240,8 @@ function watchBreaksSelector() {
 }
 
 $('.break-options').change(function() {
-  location.reload();
+//breakSelected = $('.break-options').val();
+  //location.reload();
 })
 
 $(watchBreaksSelector());

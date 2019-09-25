@@ -8,19 +8,10 @@ let STORE = [
     'get': true
   }
 ]
-
-
 const catUrl = "https://api.thecatapi.com/v1/images/search?"
 const ronUrl = "https://ron-swanson-quotes.herokuapp.com/v2/quotes/"
 let alternateRequestCounter = 0;
 
-/*
-function watchNav() {
-  if ( $('.break-options').val() === 'all' ) {
-    console.log('you have selected all')
-  }
-}
-*/
 function checkCounter() {
   //console.log(alternateRequestCounter);
   if ( alternateRequestCounter < STORE.length) {
@@ -30,7 +21,6 @@ function checkCounter() {
     alternateRequestCounter = 0;
     return alternateRequestCounter
   }
-
 }
 async function alternateRequest() {
   checkCounter();
@@ -64,7 +54,7 @@ async function requestRonQuote() {
 }
 function displayCatResults(catJson) {
   $('.results-list').append(
-    `<li><img class="catImg" src="${catJson[0].url}"><li>`
+    `<li><div class='alternate-container'><img class="catImg" src="${catJson[0].url}"></div><li>`
   );
   //console.log('`displayCatResults` has run');
 }
@@ -75,5 +65,3 @@ function displayRonResults(json) {
   );
   //console.log('`displayRonResults` has run');
 }
-
-//requestRonQuote();
