@@ -60,8 +60,8 @@ function displayCatResults(catJson) {
 }
 function displayRonResults(json) {
   $('.results-list').append(
-    `<li><div class="Swanson Container">
-    </div><h4 class="ron-quote">${json}</h4><li>`
+    `<li><div class='alternate-container'><div class="Swanson Container">
+    </div><h4 class="ron-quote">${json}</h4></div><li>`
   );
   //console.log('`displayRonResults` has run');
 }
