@@ -14,31 +14,47 @@ body {
 }
 
 /* HEADER */
-
-.search-form {
-  box-shadow: 3px 2px 6px #858585;
+header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: .5em .3em;
+  box-shadow: 3px 2px 6px #858585;
   height: 3em;
-  /* position: fixed; */
+}
+form {
+  display: grid;
+  grid-column: 6/8;
+  height: 3em;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: .5em .3em;
 }
 input {
   background-color: #fff;
   border: none;
   border-radius: 10px;
+  height: 3em;
 }
 .menu-btn {
   background-image: url(img/burgermenu2.png);
+  background-color: #fff;
+}
+.close-menu {
+  display: none;
+  font-size: 1.5em;
+  color: #858585;
+  width: 90%;
+  border: 1px #111;
+  background-color: #ededed;
+}
+.menu-btn, .close-menu {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 50%;
-  /* width: 70%; */
   max-width: 3em;
   height: auto;
   margin: .25em;
   border-radius: 10px;
-  background-color: #fff;
+  transition: all 1s ease 1s;
 }
 .logo {
   display: grid;
@@ -50,29 +66,32 @@ input {
   height: auto;
   /* grid-column: 2/4; */
   grid-column: 3/6;
-  transition: .7s;
+  transition: all 1s ease 2s;
 }
 .back-btn {
-  grid-column: 3/4;
+  grid-column: 1/2;
   display: none;
+  background-color: #fff;
   margin: auto;
 }
 .search-input {
-  grid-column: 4/7;
+  grid-column: 1/2;
+  display: none;
   background-color: #ededed;
   padding: 0 1em;
-  font-size: 1.25em;
-  margin: .2em 0;
+  font-size: 1em;
+  margin: .25em 0;
   width: 100%;
-  display: none;
-  transition: .7s;
+  transition: all 1s ease 2s;
+  height: 2.5em;
 }
 .search {
-  grid-column: 7/8;
+  grid-column: 2/3;
   background-image: url(img/search.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 70%;
+  border-radius: 10px;
+  background-size: 65%;
   width: 90%;
   max-width: 3em;
   height: auto;
@@ -83,33 +102,103 @@ input {
 
 nav {
   position: fixed;
+  top: 3em;
   left: -80vw;
   border-radius: 0 0 10px 0;
-  box-shadow: 3px 2px 6px #858585;
+  box-shadow: 3px 3px 3px #858585;
   background-color: #fff;
   width: 60vw;
   height: auto;
-  padding: 2em;
+  padding: 1em 2em;
   transition: .7s;
 }
-.menu-logo {
-  height: 2em;
-}
 .menu-item {
-  margin: .65em;
+  margin: 1em .75em;
   color: #111;
 }
 .menu-item:hover {
   cursor: pointer;
 }
-.menu-top {
-  border-bottom: 1px solid #c9c9c9;
+.top {
+  border-top: 1px solid #c9c9c9;
+  padding-top: 1em;
 }
 .break-options {
   border: .5px solid #c9c9c9;
   box-shadow: 2px 2px 2px #c9c9c9;
   padding: .1em .2em;
 }
+
+/* SIGN IN FORM */
+
+.sign-in-box {
+  display: none;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  background-color: rgb(255, 255, 255, 0.6);
+  width: 100%;
+  height: 100%;
+}
+.sign-in {
+  display: none;
+  position: fixed;
+  top: 10%;
+  z-index: 1000;
+  width: 80%;
+  height: auto;
+  margin: 10%;
+  background-color: #fff;
+  border: 1.5px solid #858585;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px #858585;
+  padding: 2em 0;
+}
+.sign-in h2 {
+  text-align: center;
+  color: #ff4040;
+  font-size: 1.5em;
+  letter-spacing: 5px;
+  text-shadow: .05em .025em .025em #c9c9c9;
+}
+.sign-in h2 span{
+  color: rgb(255, 156, 0, 1);
+}
+.sign-in label {
+  display: block;
+  margin: 2em auto 1em;
+  text-align: center;
+  font-size: 1.1em;
+  letter-spacing: 4px;
+}
+.sign-in input {
+  display: block;
+  width: 75%;
+  height: 3em;
+  margin: 1em auto 2em;
+  text-align: center;
+  background-color: #ededed;
+  border: 1px solid #858585;
+}
+.sign-in .submit {
+  border: 1.5px solid #111;
+  background-color: rgb(255, 156, 0, .7);
+  letter-spacing: 4px;
+}
+.sign-in .submit:hover {
+  cursor: pointer;
+  background-color: rgb(255, 156, 0, 1);
+}
+.sign-in h4 {
+  text-align: center;
+  font-size: .8em;
+  text-decoration: underline;
+  color: rgb(0, 167, 167, .7);
+}
+.sign-in h4:hover {
+  color: rgb(0, 167, 167, 1);
+}
+
 
 /* RESULTS */
 
@@ -215,8 +304,12 @@ a {
     margin: .35em 0;
   }
   .search {
-    background-color: #FF9C00;
+    background-color: #ededed;
   }
+  .search:hover {
+    background-color: rgb(255, 156, 0, 1);
+  }
+
   nav {
     width: 40vw;
   }
