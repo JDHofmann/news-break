@@ -13,23 +13,32 @@
     <button class="menu-btn" type="button" aria-label="open the menu"></button>
     <button class="close-menu" type="button" aria-label="close the menu">X</button>
     <nav role="navigation">
-      <li class="menu-item account-sign-in">Sign In / Sign Up</li>
-      <label class="menu-item" for="break-options">Break Options</label>
-      <select class="break-options menu-item" name="break-options">
-        <option value="all">All (default)</option>
-        <option value="cats">Cats</option>
-        <option value="ron">Ron Swanson</option>
-      </select>
       <li class="menu-item top">Top Headlines</li>
       <li class="menu-item business">Business</li>
       <li class="menu-item technology">Technology</li>
       <li class="menu-item health">Health</li>
       <li class="menu-item sports">Sports</li>
       <li class="menu-item entertainment">Entertainment</li>
+      <label class="menu-item" for="break-options">Break Options</label>
+      <select class="break-options menu-item" name="break-options">
+        <option value="all">All (default)</option>
+        <option value="cats">Cats</option>
+        <option value="ron">Ron Swanson</option>
+      </select>
+      <li class="menu-item account-sign-in">Sign In / Sign Up</li>
+      <div class="sign-in-box">
+        <form class="sign-in" id="signIn" action="index.html" method="post">
+          <h2>Sign <span>In</h2>
+          <label for="account-email">Email</label>
+          <input type="text" name="account-email" placeholder="youremail@gmail.com">
+          <label for="account-pw">Password</label>
+          <input type="text" name="pw" placeholder="123456...">
+          <button type="submit" name="button" class="submit">Submit</button>
+          <h4>Create an account</h4>
+        </form>
     </nav>
     <div class="logo"></div>
     <form>
-
         <button class="back-btn" type="button" name="button">&#8592;</button>
         <input type="text" name="search-term" class="search-input">
         <button class="search" type="submit" value=""></button>
@@ -38,16 +47,6 @@
   <section class="results">
     <!--<h2 class="theme">Stay Informed - Not Overwhelmed</h2>-->
     <h1 class="search-parameter"></h1>
-    <div class="sign-in-box">
-      <form class="sign-in" id="signIn"action="index.html" method="post">
-        <h2>Sign <span>In</h2>
-        <label for="account-email">Email</label>
-        <input type="text" name="account-email" placeholder="youremail@gmail.com">
-        <label for="account-pw">Password</label>
-        <input type="text" name="pw" placeholder="123456...">
-        <input class="submit" type="submit" name="" value="Submit">
-        <h4>Create an account</h4>
-      </form>
     </div>
     <ul class="results-list">
     </ul>

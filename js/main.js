@@ -162,12 +162,11 @@ function watchMenu() {
     event.stopPropagation();
     event.preventDefault();
     displayMenu();
-    watchOpenMenu();
+    closeMenu();
   })
 }
-function watchOpenMenu() {
-  let notNav = $('.results, input');
-  notNav.on('click', function(event) {
+function closeMenu() {
+  $('.close-menu').on('click', function(event) {
     event.preventDefault();
       removeMenu();
       // console.log('remove menu');
