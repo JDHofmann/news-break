@@ -56,20 +56,16 @@ const underTabletSize = window.matchMedia("(max-width: 767px)");
 function checkScreenSize(underTabletSize, desktopSize) {
   if (underTabletSize.matches) { // If media query matches
     mobileMenu = true;
-    console.log(mobileMenu)
     return mobileMenu
 
   }
   else if (desktopSize.matches) {
     desktopMenu = true;
-    console.log(desktopMenu);
     return desktopMenu
   }
   else {
     mobileMenu = false;
     desktopMenu = false;
-    console.log(desktopMenu)
-    console.log(mobileMenu)
     return mobileMenu, desktopMenu
   }
 
@@ -214,7 +210,6 @@ $('.entertainment').on('click', function(event) {
 
 function pageNumberTracker() {
   pageNumber = pageNumber + 1;
-  console.log(`${pageNumber} from pageNumberTracker`);
   return pageNumber;
 }
 
@@ -230,12 +225,7 @@ function formatQueryParams(params) {
   return queryItems.join('&');
 }
 
-async function displayResults(responseJson, pageNumber) {
-  console.log(areThereMoreStories)
-  console.log(pageNumber)
-  mostRecentJson = responseJson;
-  watchBreaksChange(mostRecentJson);
-  //console.log(responseJson)
+async function displayResults(responseJson, pageNumber, query) {
   let storyCounter = 1;
     $('.results-list').empty();
     $('.results-list').append(
@@ -250,7 +240,6 @@ async function displayResults(responseJson, pageNumber) {
         break;
         return areThereMoreStories
       }
-
         else {
           $('.results-list').append(
           `<li><a target="_blank" aria-describedby="continue reading ${responseJson.articles[storyCounter].title} in a new tab" href="${responseJson.articles[storyCounter].url}"><div class="story-container"><h3>${responseJson.articles[storyCounter].title}</h3><h5>${responseJson.articles[storyCounter].source.name}</h5><p> &bull; ${responseJson.articles[storyCounter].description}</p></div><img class="article-thumbnail" src='${responseJson.articles[storyCounter].urlToImage}'>
@@ -258,37 +247,29 @@ async function displayResults(responseJson, pageNumber) {
           );
           storyCounter++;
         }
-//    console.log(`story ${storyCounter} ${responseJson.articles[storyCounter].title}`);
   }
   console.log('displayResults has run');
   if ( pageNumber < 2 && areThereMoreStories === true) {
-    watchMoreStories(categorySelected);
+    watchMoreStories(categorySelected, query);
   }
   else if ( areThereMoreStories === false) {
     removeMoreStories()
   }
 };
 
-function saveJson(responseJson) {
-  mostRecentJson = responseJson;
-  return mostRecentJson
-}
-
-function watchMoreStories(categorySelected) {
-  console.log(`watchMoreStories is called pageNumber= ${pageNumber}`);
+function watchMoreStories(categorySelected, query ) {
+  //console.log(`watchMoreStories is called pageNumber= ${pageNumber}`);
   $('.more-stories').css('display', 'block');
 // test
-  $('.more-stories').on('click', function(event) {
-    console.log('more stories clicked')
+  $('.more-stories').on('click', async function(event) {
     if (loading.headlines === true) {
-      console.log('loadHeadlines called');
-      loadHeadlines(pageNumber);
+      await loadHeadlines(pageNumber);
     }
     else if ( loading.sheadlines === true) {
-      loadSpecificHeadlines(categorySelected, pageNumber);
+      await loadSpecificHeadlines(categorySelected, pageNumber);
     }
     else if ( loading.news === true ) {
-      getNews(pageNumber);
+      await getNews(query, pageNumber);
     }
   })
   // console.log('watchMoreStories has run');
@@ -323,13 +304,17 @@ async function loadHeadlines(pageNumber){
       }
       throw new Error(response.statusText);
     })
-    .then(responseJson => displayResults(responseJson, pageNumber))
+    .then(function (responseJson){
+      displayResults(responseJson, pageNumber);
+      mostRecentJson = responseJson;
+      return mostRecentJson
+    })
     .catch( err => {
       $('.error-message').text(`Something in loadHeadlines went wrong: ${err.message}`);
     });
-    //console.log('loadHeadlines ran');
   pageNumberTracker();
-    // return pageNumber
+  /* console.log(mostRecentJson) */
+  /* return mostRecentJson */
 }
 
 async function loadSpecificHeadlines(categorySelected, pageNumber){
@@ -358,8 +343,11 @@ async function loadSpecificHeadlines(categorySelected, pageNumber){
       }
       throw new Error(response.statusText);
     })
-    .then(responseJson => displayResults(responseJson, pageNumber))
-    /*
+    .then(function (responseJson){
+      displayResults(responseJson, pageNumber);
+      mostRecentJson = responseJson;
+      return mostRecentJson
+    })    /*
     .catch( err => {
       $('.error-message').text(`Something in loadSpecificHeadlines went wrong: ${err.message}`);
     });
@@ -392,17 +380,19 @@ async function getNews(query, pageNumber) {
       }
       throw new Error(response.statusText);
     })
-    .then(responseJson => displayResults(responseJson, pageNumber))
+    .then( function (responseJson){
+      displayResults(responseJson, pageNumber, query);
+      mostRecentJson = responseJson;
+      return mostRecentJson
+    })
     .catch( err => {
       $('.error-message').text(`Something went wrong: ${err.message}`);
     });
-  console.log('getNews ran');
   await pageNumberTracker();
 }
 
 function watchBreaksSelector() {
   let breaksSelector = $('.break-options').val();
-  //console.log(breaksSelector);
   if ( breaksSelector === 'all') {
     for ( let i = 0; i < STORE.length; i++) {
       STORE[i].get = true;
@@ -434,12 +424,12 @@ function watchBreaksSelector() {
 function watchBreaksChange(responseJson) {
   $('.break-options').change(function() {
     watchBreaksSelector();
-    displayResults(responseJson);
+    displayResults(mostRecentJson, pageNumber);
   })
 }
 
+$(watchBreaksChange());
 $(checkScreenSize(underTabletSize, desktopSize));
-$(watchBreaksSelector());
 $(watchMenu());
 $(loadHeadlines(pageNumber));
 $(watchForm(mobileMenu));
