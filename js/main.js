@@ -1,13 +1,8 @@
 'use strict';
-const newsApiKey = "22e6ec438e804e658da00de572c65e51";
-const headlinesUrl = 'https://newsapi.org/v2/top-headlines';
-const specificHeadlinesUrl = 'https://newsapi.org/v2/top-headlines';
-const searchURL = 'https://newsapi.org/v2/everything';
-const searchTerm = '';
-let pageNumber = 1;
+const newsApiKey = "22e6ec438e804e658da00de572c65e51", headlinesUrl = 'https://newsapi.org/v2/top-headlines', specificHeadlinesUrl = 'https://newsapi.org/v2/top-headlines', searchURL = 'https://newsapi.org/v2/everything', searchTerm = '';
+let breakSelected, categorySelected, mostRecentJson, pageNumber = 1;
 let toggleCat, toggleRon, areThereMoreStories = true;
 let mobileMenu, desktopMenu, signInOpen, isSearchBarEnabled = false;
-let breakSelected, categorySelected, mostRecentJson;
 let loading = {
   'headlines':false,
   'sheadlines':false,
@@ -233,30 +228,9 @@ async function displayResults(responseJson, pageNumber, query) {
           storyCounter++;
         }
   }
-  console.log(`displayResults has run pageNumber ${pageNumber}`);
-  /* if displaying page 1 of a new section call watchMoreStories
-  if ( areThereMoreStories === false) {
-    removeMoreStories()
-  }
-  else if ( areThereMoreStories === true ) {
-    displayMoreStories();
-  } */
   watchMoreStories(categorySelected, query, pageNumber);
 };
-/*
-// Button at the bottom
-when it is clicked it calls the next page of results
-when results are empty, it is hidden
-*/
-function displayMoreStories() {
-  $('.more-stories').css('display', 'block')
-}
-function removeMoreStories() {
-  // console.log('thats all folks')
-  $('.more-stories').css('display', 'none');
-}
 
-let counter = 0
 function watchMoreStories(categorySelected, query ) {
   $('.more-stories').remove()
   if (areThereMoreStories === true)  {
@@ -264,27 +238,16 @@ function watchMoreStories(categorySelected, query ) {
     $('.more-stories').on('click', function(event) {
       if (loading.headlines === true) {
         loadHeadlines(pageNumber);
-        console.log('headlines called from more stories click')
       }
       else if ( loading.sheadlines === true) {
         loadSpecificHeadlines(categorySelected, pageNumber);
-        console.log(`specificHeadlines called`)
-        counter++;
-        console.log(counter)
-        return counter
       }
       else if ( loading.news === true ) {
         getNews(query, pageNumber);
-        console.log('getNews called from more stories click');
-        counter++;
-        console.log(counter)
-        return counter
       }
     })
   }
 }
-
-
 
 async function loadHeadlines(pageNumber){
   $('.search-parameter').html('Top Headlines');
@@ -430,7 +393,6 @@ function watchBreaksChange(responseJson) {
     displayResults(mostRecentJson, pageNumber);
   })
 }
-/* $(watchMoreStories()); */
 $(watchBreaksChange());
 $(checkScreenSize(underTabletSize, desktopSize));
 $(watchMenu());
