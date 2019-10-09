@@ -6,17 +6,13 @@ const searchURL = 'https://newsapi.org/v2/everything';
 const searchTerm = '';
 let pageNumber = 1;
 let toggleCat, toggleRon, areThereMoreStories = true;
-let breakSelected;
-let categorySelected;
-let mostRecentJson;
 let mobileMenu, desktopMenu, signInOpen, isSearchBarEnabled = false;
+let breakSelected, categorySelected, mostRecentJson;
 let loading = {
   'headlines':false,
   'sheadlines':false,
   'news':false
 }
-// $('.break-options').val(breaksSelected);
-
 
 /* SIGN IN POP UP */
 
@@ -28,21 +24,15 @@ $('.account-sign-in').on('click', function(event) {
 })
 
 function watchSignIn() {
-  $('.sign-in-close').on('click', function(event) {
-    removeSignIn();
-  })
+  $('.sign-in-close').on('click', e => removeSignIn())
   $(document).keyup(function(e) {
      if (e.key === "Escape") {
        removeSignIn();
     }
 });
 }
-$('.submit').on('click', function(event) {
-  removeSignIn();
-})
-$('.sign-in-mask').on('click', function(event) {
-  removeSignIn();
-})
+$('.submit').on('click', e => removeSignIn())
+$('.sign-in-mask').on('click', e => removeSignIn())
 
 function removeSignIn() {
   $('.sign-in-mask').css('display','none');
@@ -57,7 +47,6 @@ function checkScreenSize(underTabletSize, desktopSize) {
   if (underTabletSize.matches) { // If media query matches
     mobileMenu = true;
     return mobileMenu
-
   }
   else if (desktopSize.matches) {
     desktopMenu = true;
@@ -68,11 +57,8 @@ function checkScreenSize(underTabletSize, desktopSize) {
     desktopMenu = false;
     return mobileMenu, desktopMenu
   }
-
 }
-$('.back-btn').on('click', function(event) {
-  disableSearchBar();
-});
+$('.back-btn').on('click', e => disableSearchBar())
 $('.search').on('click', function(event) {
   if ( isSearchBarEnabled === false && mobileMenu === true ) {
     event.preventDefault();
@@ -111,7 +97,7 @@ function toggleSearchStatus() {
 }
 
 function watchForm(mobileMenu) {
-  $('form').submit(event => {
+  $('form').submit( event => {
     event.preventDefault();
     removeMenu();
     resetPageNumber();
@@ -121,8 +107,7 @@ function watchForm(mobileMenu) {
     if ( mobileMenu === true ) {
       disableSearchBar();
     }
-    else {
-    }
+    else {}
   });
 }
 
@@ -144,7 +129,7 @@ function closeMenu() {
   $('.nav-mask').on('click', function(event) {
     removeMenu();
   })
-  $(document).keyup(function(e) {
+  $(document).keyup( function(e) {
      if (e.key === "Escape") {
        removeMenu();
      }
@@ -313,8 +298,6 @@ async function loadHeadlines(pageNumber){
       $('.error-message').text(`Something in loadHeadlines went wrong: ${err.message}`);
     });
   pageNumberTracker();
-  /* console.log(mostRecentJson) */
-  /* return mostRecentJson */
 }
 
 async function loadSpecificHeadlines(categorySelected, pageNumber){
@@ -328,7 +311,6 @@ async function loadSpecificHeadlines(categorySelected, pageNumber){
     pageSize: 12,
     page: pageNumber,
     category: categorySelected,
-    // for menu links
     };
   const queryString = await formatQueryParams(params)
   const url = specificHeadlinesUrl + '?' + queryString;
@@ -380,7 +362,7 @@ async function getNews(query, pageNumber) {
       }
       throw new Error(response.statusText);
     })
-    .then( function (responseJson){
+    .then( function(responseJson) {
       displayResults(responseJson, pageNumber, query);
       mostRecentJson = responseJson;
       return mostRecentJson
