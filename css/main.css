@@ -148,7 +148,6 @@ input {
   border: .5px solid #c9c9c9;
   box-shadow: 2px 2px 2px #c9c9c9;
   padding: .2em;
-  width: 20vw;
 }
 .nav-mask {
   z-index: 50;
@@ -386,6 +385,7 @@ a {
     width: 70%;
   }
   .menu-item {
+    margin: 1em auto;
     font-size: 1.15em;
   }
   .search-parameter {
