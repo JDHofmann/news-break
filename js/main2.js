@@ -233,58 +233,37 @@ async function displayResults(responseJson, pageNumber, query) {
           storyCounter++;
         }
   }
-  console.log(`displayResults has run pageNumber ${pageNumber}`);
-  /* if displaying page 1 of a new section call watchMoreStories
-  if ( areThereMoreStories === false) {
+  console.log('displayResults has run');
+  if ( pageNumber < 2 && areThereMoreStories === true) {
+    watchMoreStories(categorySelected, query);
+  }
+  else if ( areThereMoreStories === false) {
     removeMoreStories()
   }
-  else if ( areThereMoreStories === true ) {
-    displayMoreStories();
-  } */
-  watchMoreStories(categorySelected, query, pageNumber);
 };
-/*
-// Button at the bottom
-when it is clicked it calls the next page of results
-when results are empty, it is hidden
-*/
-function displayMoreStories() {
-  $('.more-stories').css('display', 'block')
+
+function watchMoreStories(categorySelected, query ) {
+  //console.log(`watchMoreStories is called pageNumber= ${pageNumber}`);
+  $('.more-stories').css('display', 'block');
+// test
+  $('.more-stories').on('click', async function(event) {
+    if (loading.headlines === true) {
+      await loadHeadlines(pageNumber);
+    }
+    else if ( loading.sheadlines === true) {
+      await loadSpecificHeadlines(categorySelected, pageNumber);
+    }
+    else if ( loading.news === true ) {
+      await getNews(query, pageNumber);
+    }
+  })
+  // console.log('watchMoreStories has run');
 }
+
 function removeMoreStories() {
   // console.log('thats all folks')
   $('.more-stories').css('display', 'none');
 }
-
-let counter = 0
-function watchMoreStories(categorySelected, query ) {
-  $('.more-stories').remove()
-  if (areThereMoreStories === true)  {
-    $('.results').append('<h4 class="more-stories">Load More Stories</h4>')
-    $('.more-stories').on('click', function(event) {
-      if (loading.headlines === true) {
-        loadHeadlines(pageNumber);
-        console.log('headlines called from more stories click')
-      }
-      else if ( loading.sheadlines === true) {
-        loadSpecificHeadlines(categorySelected, pageNumber);
-        console.log(`specificHeadlines called`)
-        counter++;
-        console.log(counter)
-        return counter
-      }
-      else if ( loading.news === true ) {
-        getNews(query, pageNumber);
-        console.log('getNews called from more stories click');
-        counter++;
-        console.log(counter)
-        return counter
-      }
-    })
-  }
-}
-
-
 
 async function loadHeadlines(pageNumber){
   $('.search-parameter').html('Top Headlines');
@@ -319,7 +298,6 @@ async function loadHeadlines(pageNumber){
       $('.error-message').text(`Something in loadHeadlines went wrong: ${err.message}`);
     });
   pageNumberTracker();
-  return pageNumber;
 }
 
 async function loadSpecificHeadlines(categorySelected, pageNumber){
@@ -347,16 +325,17 @@ async function loadSpecificHeadlines(categorySelected, pageNumber){
       }
       throw new Error(response.statusText);
     })
-    .then(function(responseJson) {
+    .then(function (responseJson){
       displayResults(responseJson, pageNumber);
       mostRecentJson = responseJson;
       return mostRecentJson
-    })
+    })    /*
     .catch( err => {
       $('.error-message').text(`Something in loadSpecificHeadlines went wrong: ${err.message}`);
     });
-    pageNumberTracker();
-    return categorySelected, pageNumber;
+    */
+    //console.log('loadSpecificHeadlines ran');
+    await pageNumberTracker();
 }
 
 async function getNews(query, pageNumber) {
@@ -391,7 +370,7 @@ async function getNews(query, pageNumber) {
     .catch( err => {
       $('.error-message').text(`Something went wrong: ${err.message}`);
     });
-  pageNumberTracker();
+  await pageNumberTracker();
 }
 
 function watchBreaksSelector() {
@@ -430,7 +409,7 @@ function watchBreaksChange(responseJson) {
     displayResults(mostRecentJson, pageNumber);
   })
 }
-/* $(watchMoreStories()); */
+
 $(watchBreaksChange());
 $(checkScreenSize(underTabletSize, desktopSize));
 $(watchMenu());
