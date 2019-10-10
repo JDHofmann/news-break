@@ -13,6 +13,8 @@ body {
   line-height: 1;
 }
 
+/* SMALL SIZING */
+
 /* HEADER */
 header {
   display: grid;
@@ -330,7 +332,7 @@ a {
   cursor: pointer;
 }
 
-/* TABLET 1 */
+/* MEDIUM  SIZING*/
 
 @media only screen and (min-width: 768px) {
   header {
@@ -402,7 +404,7 @@ a {
   }
 }
 
-/* TABLET 2 SIZING */
+/* MEDIUM LANDSCAPE  SIZING*/
 
 @media only screen and (min-height: 1024px) {
 
@@ -418,7 +420,7 @@ a {
   }
 }
 
-/* DESKTOP SIZING */
+/* LARGE SIZING */
 
 @media only screen and (min-width: 820px) {
 
