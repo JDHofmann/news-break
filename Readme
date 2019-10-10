@@ -1,5 +1,9 @@
 News break
 
+Summary:
+
+We all need to stay informed, but not get overwhelmed.  News Break is designed to give the user up to date news while splicing some lighter content in as well. 
+
 Live App:
 https://jdhofmann.github.io/news-break/
 
@@ -7,19 +11,35 @@ Repo:
 https://github.com/JDHofmann/news-break
 
 Screenshots:
-![image](https://user-images.githubusercontent.com/49991002/66529744-a2fc8280-ead2-11e9-86fc-d0b1186466c8.png)
-![Screen Shot 2019-10-09 at 8 09 59 PM](https://user-images.githubusercontent.com/49991002/66529760-af80db00-ead2-11e9-8237-335a8a945622.png)
-![Screen Shot 2019-10-09 at 8 10 25 PM](https://user-images.githubusercontent.com/49991002/66529762-b1e33500-ead2-11e9-94b0-4495dfc8a218.png)
-![Screen Shot 2019-10-09 at 8 10 53 PM](https://user-images.githubusercontent.com/49991002/66529767-b4458f00-ead2-11e9-8ef8-f388147a890f.png)
-![Screen Shot 2019-10-09 at 8 11 06 PM](https://user-images.githubusercontent.com/49991002/66529768-b7407f80-ead2-11e9-8674-60165df87b63.png)
+
+Mobile Landing Page
+
 ![Screen Shot 2019-10-09 at 8 11 23 PM](https://user-images.githubusercontent.com/49991002/66529773-bad40680-ead2-11e9-857b-91a5cfe94427.png)
 
+Mobile Sizing featuring Ron Swanson
 
-Summary:
+![Screen Shot 2019-10-09 at 8 09 59 PM](https://user-images.githubusercontent.com/49991002/66529760-af80db00-ead2-11e9-8237-335a8a945622.png)
 
-We all need to stay informed, but not get overwhelmed.  News Break is designed to give the user up to date news while splicing some lighter content in as well.  
+Mobile Sizing featuring a cute cat
 
-Technologies:
+![Screen Shot 2019-10-09 at 8 10 25 PM](https://user-images.githubusercontent.com/49991002/66529762-b1e33500-ead2-11e9-94b0-4495dfc8a218.png)
+
+Tablet Sizing featuring a cute cat
+![Screen Shot 2019-10-09 at 8 10 53 PM](https://user-images.githubusercontent.com/49991002/66529767-b4458f00-ead2-11e9-8ef8-f388147a890f.png)
+
+Tablet Sizing Menu
+
+![Screen Shot 2019-10-09 at 8 11 06 PM](https://user-images.githubusercontent.com/49991002/66529768-b7407f80-ead2-11e9-8674-60165df87b63.png)
+
+Desktop Sizing featuring Ron Swanson
+
+![image](https://user-images.githubusercontent.com/49991002/66529744-a2fc8280-ead2-11e9-86fc-d0b1186466c8.png)
+
+
+
+
+
+Built With
 
 HTML
 CSS
