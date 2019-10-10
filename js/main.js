@@ -220,7 +220,12 @@ function formatQueryParams(params) {
 
 async function displayResults(responseJson, pageNumber, query) {
   let storyCounter = 1;
-    $('.results-list').empty();
+  $('.results-list').empty();
+  if ( responseJson.articles[0] === undefined) {
+    $('.results-list').append(`<li><div class="story-container"><h3>Sorry we couldn't load any stories</h3></li>`);
+    $('.more-stories').remove();
+  }
+  else {
     $('.results-list').append(
       `<li><a target="_blank" aria-describedby="continue reading ${responseJson.articles[0].title} in a new tab" href="${responseJson.articles[0].url}"><div class="story-container"><h3>${responseJson.articles[0].title}</h3><h5>${responseJson.articles[0].source.name}</h5><p> &bull; ${responseJson.articles[0].description}</p></div><img class="article-thumbnail" src='${responseJson.articles[0].urlToImage}'>
       </a></li>`);
@@ -228,10 +233,10 @@ async function displayResults(responseJson, pageNumber, query) {
       if ( (i + 1) % 4 === 0 ) {
         await alternateRequest();
       }
-      else if ( responseJson.articles[storyCounter] === undefined) {
-        areThereMoreStories = false;
-        break;
-      }
+        else if ( responseJson.articles[storyCounter] === undefined) {
+          areThereMoreStories = false;
+          break;
+        }
         else {
           $('.results-list').append(
           `<li><a target="_blank" aria-describedby="continue reading ${responseJson.articles[storyCounter].title} in a new tab" href="${responseJson.articles[storyCounter].url}"><div class="story-container"><h3>${responseJson.articles[storyCounter].title}</h3><h5>${responseJson.articles[storyCounter].source.name}</h5><p> &bull; ${responseJson.articles[storyCounter].description}</p></div><img class="article-thumbnail" src='${responseJson.articles[storyCounter].urlToImage}'>
@@ -239,8 +244,10 @@ async function displayResults(responseJson, pageNumber, query) {
           );
           storyCounter++;
         }
+      }
+    watchMoreStories(categorySelected, query, pageNumber);
+
   }
-  watchMoreStories(categorySelected, query, pageNumber);
 }
 
 // MORE STORIES BUTTON
@@ -295,7 +302,8 @@ async function loadHeadlines(pageNumber){
       return mostRecentJson;
     })
     .catch( err => {
-      $('.error-message').text(`Something in loadHeadlines went wrong: ${err.message}`);
+      $('.error-message').text("Sorry we couldn't load any stories");
+      $('.more-stories').remove();
     });
   pageNumberTracker();
   return pageNumber;
@@ -334,7 +342,8 @@ async function loadSpecificHeadlines(categorySelected, pageNumber) {
       return mostRecentJson;
     })
     .catch( err => {
-      $('.error-message').text(`Something in loadSpecificHeadlines went wrong: ${err.message}`);
+      $('.error-message').text("Sorry we couldn't load any stories");
+      $('.more-stories').remove();
     });
     pageNumberTracker();
     return categorySelected, pageNumber;
@@ -372,7 +381,8 @@ async function getNews(query, pageNumber) {
       return mostRecentJson;
     })
     .catch( err => {
-      $('.error-message').text(`Something went wrong: ${err.message}`);
+      $('.error-message').text("Sorry we couldn't load any stories");
+      $('.more-stories').remove();
     });
   pageNumberTracker();
 }
