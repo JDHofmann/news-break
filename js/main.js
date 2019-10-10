@@ -42,7 +42,8 @@ function removeSignIn() {
   $('.sign-in').css('display','none');
 }
 
-// SEARCH BAR
+// SEARCH BAR POPS OUT FOR FOR MOBILE
+
 const desktopSize = window.matchMedia("(min-width: 820px)");
 const underTabletSize = window.matchMedia("(max-width: 767px)");
 
@@ -99,6 +100,8 @@ function toggleSearchStatus() {
   }
 }
 
+// FORM SUBMISSION FOR SEARCH
+
 function watchForm(mobileMenu) {
   $('form').submit( event => {
     event.preventDefault();
@@ -114,7 +117,7 @@ function watchForm(mobileMenu) {
   });
 }
 
-// BURGER MENU
+// BURGER MENU OPEN AND CLOSE
 
 function watchMenu() {
   $('.menu-btn').on( 'click', function(event) {
@@ -154,7 +157,7 @@ function removeMenu() {
   }
 }
 
-/* HEADLINES */
+/* HEADLINES LINKS */
 
 $('.top').on('click', function(event) {
   categorySelected = 'Top Headlines';
@@ -213,6 +216,8 @@ function formatQueryParams(params) {
   return queryItems.join('&');
 }
 
+// DISPLAY RESULTS OF ALL FETCHES
+
 async function displayResults(responseJson, pageNumber, query) {
   let storyCounter = 1;
     $('.results-list').empty();
@@ -238,6 +243,8 @@ async function displayResults(responseJson, pageNumber, query) {
   watchMoreStories(categorySelected, query, pageNumber);
 }
 
+// MORE STORIES BUTTON
+
 function watchMoreStories(categorySelected, query ) {
   $('.more-stories').remove();
   if (areThereMoreStories === true)  {
@@ -255,6 +262,8 @@ function watchMoreStories(categorySelected, query ) {
     });
   }
 }
+
+// TOP HEADLINES FETCH
 
 async function loadHeadlines(pageNumber){
   $('.search-parameter').html('Top Headlines');
@@ -291,6 +300,8 @@ async function loadHeadlines(pageNumber){
   pageNumberTracker();
   return pageNumber;
 }
+
+// OTHER HEADLINES FETCH
 
 async function loadSpecificHeadlines(categorySelected, pageNumber) {
   $('.search-parameter').html(`${categorySelected}`);
@@ -329,6 +340,8 @@ async function loadSpecificHeadlines(categorySelected, pageNumber) {
     return categorySelected, pageNumber;
 }
 
+// NEWS SEARCH FETCH
+
 async function getNews(query, pageNumber) {
   $('.search-parameter').html(`${query}`);
   loading.news = true;
@@ -363,6 +376,8 @@ async function getNews(query, pageNumber) {
     });
   pageNumberTracker();
 }
+
+// BREAKS SELECTOR LOCATED IN NAV
 
 function watchBreaksSelector() {
   let $breaksSelector = $('.break-options').val();
@@ -400,6 +415,9 @@ function watchBreaksChange(responseJson) {
     displayResults(mostRecentJson, pageNumber);
   });
 }
+
+// ON LOAD
+
 $(watchBreaksChange());
 $(checkScreenSize(underTabletSize, desktopSize));
 $(watchMenu());
