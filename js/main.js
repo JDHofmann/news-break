@@ -1,5 +1,6 @@
 'use strict';
-const newsApiKey = "22e6ec438e804e658da00de572c65e51", headlinesUrl = 'https://newsapi.org/v2/top-headlines', specificHeadlinesUrl = 'https://newsapi.org/v2/top-headlines', searchURL = 'https://newsapi.org/v2/everything', searchTerm = '';
+const newsApiKey = "22e6ec438e804e658da00de572c65e51";
+const headlinesUrl = 'https://newsapi.org/v2/top-headlines', specificHeadlinesUrl = 'https://newsapi.org/v2/top-headlines', searchURL = 'https://newsapi.org/v2/everything', searchTerm = '';
 let breakSelected, categorySelected, mostRecentJson, pageNumber = 1;
 let toggleCat, toggleRon, areThereMoreStories = true;
 let mobileMenu, desktopMenu, signInOpen, isSearchBarEnabled = false;
