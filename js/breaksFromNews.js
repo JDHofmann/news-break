@@ -7,19 +7,19 @@ let STORE = [
     'function': 'requestRonQuote();',
     'get': true
   }
-]
-const catUrl = "https://api.thecatapi.com/v1/images/search?"
-const ronUrl = "https://ron-swanson-quotes.herokuapp.com/v2/quotes/"
+];
+const catUrl = "https://api.thecatapi.com/v1/images/search?";
+const ronUrl = "https://ron-swanson-quotes.herokuapp.com/v2/quotes/";
 let alternateRequestCounter = 0;
 
 function checkCounter() {
   //console.log(alternateRequestCounter);
   if ( alternateRequestCounter < STORE.length) {
-    return alternateRequestCounter
+    return alternateRequestCounter;
   }
   else {
     alternateRequestCounter = 0;
-    return alternateRequestCounter
+    return alternateRequestCounter;
   }
 }
 async function alternateRequest() {

@@ -10,7 +10,7 @@
 </head>
 <body>
   <header>
-    <nav role="navigation">
+    <nav>
       <button class="menu-btn" type="button" aria-label="open the menu"></button>
       <button class="close-menu" type="button" aria-label="close the menu">X</button>
       <ul class="nav-list">
@@ -20,28 +20,31 @@
         <li class="menu-item health">Health</li>
         <li class="menu-item sports">Sports</li>
         <li class="menu-item entertainment">Entertainment</li>
-        <label class="menu-item options" for="break-options">Break Options</label>
-        <select class="break-options menu-item" name="break-options">
+        <li><label class="menu-item options" for="break-options">Break Options</label></li>
+        <li><select class="break-options menu-item" name="break-options" id="break-options">
           <option value="all">All (default)</option>
           <option value="cats">Cats</option>
           <option value="ron">Ron Swanson</option>
-        </select>
+        </select></li>
+
         <li class="menu-item account-sign-in">Sign In / Sign Up</li>
-        <form role="sign in form" class="sign-in" id="signIn" action="index.html" method="post">
-          <button class="sign-in-close" type="button" name="button" aria-label="close the sign in box">X</button>
-          <h2>Sign <span>In</h2>
-          <label for="account-email">Email</label>
-          <input type="text" name="account-email" required placeholder="youremail@gmail.com">
-          <label for="account-pw">Password</label>
-          <input type="text" name="pw" required placeholder="123456...">
-          <button type="submit" name="button" class="submit" aria-describedby="submit login">Submit</button>
-          <h4>Create an account</h4>
-        </form>
-        <div class="sign-in-mask"></div>
+        <li>
+          <form class="sign-in" id="signIn" action="index.html" method="post">
+            <button class="sign-in-close" type="button" name="button" aria-label="close the sign in box">X</button>
+            <h2>Sign <span>In</span></h2>
+            <label for="account-email">Email</label>
+            <input type="text" name="account-email" id="account-email" required placeholder="youremail@gmail.com">
+            <label for="pw">Password</label>
+            <input type="text" name="pw" id="pw" required placeholder="123456...">
+            <button type="submit" name="button" class="submit">Submit</button>
+            <h4>Create an account</h4>
+          </form>
+        </li>
+        <li><div class="sign-in-mask"></div></li>
       </ul>
       <div class="nav-mask"></div>
     </nav>
-    <h2 class="logo"> News <span>Break</h2>
+    <h2 class="logo"> News <span>Break</span></h2>
     <form role="search">
         <button class="back-btn" type="button" name="button">&#8592;</button>
         <input type="text" name="search-term" class="search-input">
@@ -49,8 +52,7 @@
     </form>
   </header>
   <main class="results">
-    <h1 class="search-parameter"></h1>
-    </div>
+    <h1 class="search-parameter">Headlines</h1>
     <ul class="results-list">
     </ul>
     <p id="js-error-message" class="error-message"></p>

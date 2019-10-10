@@ -1,14 +1,21 @@
+/*jshint esversion: 8 */
+/*globals $:false */
 'use strict';
 const newsApiKey = "22e6ec438e804e658da00de572c65e51";
+
 const headlinesUrl = 'https://newsapi.org/v2/top-headlines', specificHeadlinesUrl = 'https://newsapi.org/v2/top-headlines', searchURL = 'https://newsapi.org/v2/everything', searchTerm = '';
+
 let breakSelected, categorySelected, mostRecentJson, pageNumber = 1;
+
 let toggleCat, toggleRon, areThereMoreStories = true;
+
 let mobileMenu, desktopMenu, signInOpen, isSearchBarEnabled = false;
+
 let loading = {
   'headlines':false,
   'sheadlines':false,
   'news':false
-}
+};
 
 /* SIGN IN POP UP */
 
@@ -17,18 +24,18 @@ $('.account-sign-in').on('click', function(event) {
   $('.sign-in').css('display','block');
   signInOpen = true;
   watchSignIn();
-})
+});
 
 function watchSignIn() {
-  $('.sign-in-close').on('click', e => removeSignIn())
+  $('.sign-in-close').on('click', e => removeSignIn());
   $(document).keyup(function(e) {
      if (e.key === "Escape") {
        removeSignIn();
     }
 });
 }
-$('.submit').on('click', e => removeSignIn())
-$('.sign-in-mask').on('click', e => removeSignIn())
+$('.submit').on('click', e => removeSignIn());
+$('.sign-in-mask').on('click', e => removeSignIn());
 
 function removeSignIn() {
   $('.sign-in-mask').css('display','none');
@@ -42,25 +49,25 @@ const underTabletSize = window.matchMedia("(max-width: 767px)");
 function checkScreenSize(underTabletSize, desktopSize) {
   if (underTabletSize.matches) { // If media query matches
     mobileMenu = true;
-    return mobileMenu
+    return mobileMenu;
   }
   else if (desktopSize.matches) {
     desktopMenu = true;
-    return desktopMenu
+    return desktopMenu;
   }
   else {
     mobileMenu = false;
     desktopMenu = false;
-    return mobileMenu, desktopMenu
+    return mobileMenu, desktopMenu;
   }
 }
-$('.back-btn').on('click', e => disableSearchBar())
+$('.back-btn').on('click', e => disableSearchBar());
 $('.search').on('click', function(event) {
   if ( isSearchBarEnabled === false && mobileMenu === true ) {
     event.preventDefault();
     enableSearchBar();
   }
-})
+});
 function enableSearchBar() {
   $('.logo').css('display', 'none');
   $('form').css('grid-column', '2/8');
@@ -84,11 +91,11 @@ function disableSearchBar() {
 function toggleSearchStatus() {
   if ( isSearchBarEnabled === false ) {
     isSearchBarEnabled = true;
-    return isSearchBarEnabled
+    return isSearchBarEnabled;
   }
   else {
     isSearchBarEnabled = false;
-    return isSearchBarEnabled
+    return isSearchBarEnabled;
   }
 }
 
@@ -97,8 +104,8 @@ function watchForm(mobileMenu) {
     event.preventDefault();
     removeMenu();
     resetPageNumber();
-    let searchTerm = $('.search-input').val();
-    getNews(searchTerm, pageNumber);
+    let $searchTerm = $('.search-input').val();
+    getNews($searchTerm, pageNumber);
     $('.search-input').val('');
     if ( mobileMenu === true ) {
       disableSearchBar();
@@ -115,21 +122,21 @@ function watchMenu() {
     event.preventDefault();
     displayMenu();
     closeMenu();
-  })
+  });
 }
 function closeMenu() {
   $('.close-menu').on('click', function(event) {
     event.preventDefault();
     removeMenu();
-  })
+  });
   $('.nav-mask').on('click', function(event) {
     removeMenu();
-  })
+  });
   $(document).keyup( function(e) {
      if (e.key === "Escape") {
        removeMenu();
      }
-  })
+  });
 }
 function displayMenu() {
   $('.nav-list').css('left', '0');
@@ -154,38 +161,38 @@ $('.top').on('click', function(event) {
   resetPageNumber();
   loadHeadlines(pageNumber);
   removeMenu();
-})
+});
 
 $('.business').on('click', function(event) {
   categorySelected = 'Business';
   resetPageNumber();
   loadSpecificHeadlines(categorySelected, pageNumber);
   removeMenu();
-})
+});
 $('.technology').on('click', function(event) {
   categorySelected = 'Technology';
   resetPageNumber();
   loadSpecificHeadlines(categorySelected, pageNumber);
   removeMenu();
-})
+});
 $('.health').on('click', function(event) {
   categorySelected = 'Health';
   resetPageNumber();
   loadSpecificHeadlines(categorySelected, pageNumber);
   removeMenu();
-})
+});
 $('.sports').on('click', function(event) {
   categorySelected = 'Sports';
   resetPageNumber();
   loadSpecificHeadlines(categorySelected, pageNumber);
   removeMenu();
-})
+});
 $('.entertainment').on('click', function(event) {
   categorySelected = 'Entertainment';
   resetPageNumber();
   loadSpecificHeadlines(categorySelected, pageNumber);
   removeMenu();
-})
+});
 
 // NEWS FETCH
 
@@ -197,12 +204,12 @@ function pageNumberTracker() {
 function resetPageNumber(){
   pageNumber = 1;
   areThereMoreStories = true;
-  return pageNumber, areThereMoreStories
+  return pageNumber, areThereMoreStories;
 }
 
 function formatQueryParams(params) {
   const queryItems = Object.keys(params)
-    .map(key => `${key}=${params[key]}`)
+    .map(key => `${key}=${params[key]}`);
   return queryItems.join('&');
 }
 
@@ -219,7 +226,6 @@ async function displayResults(responseJson, pageNumber, query) {
       else if ( responseJson.articles[storyCounter] === undefined) {
         areThereMoreStories = false;
         break;
-        return areThereMoreStories
       }
         else {
           $('.results-list').append(
@@ -230,12 +236,12 @@ async function displayResults(responseJson, pageNumber, query) {
         }
   }
   watchMoreStories(categorySelected, query, pageNumber);
-};
+}
 
 function watchMoreStories(categorySelected, query ) {
-  $('.more-stories').remove()
+  $('.more-stories').remove();
   if (areThereMoreStories === true)  {
-    $('.results').append('<h4 class="more-stories">Load More Stories</h4>')
+    $('.results').append('<h4 class="more-stories">Load More Stories</h4>');
     $('.more-stories').on('click', function(event) {
       if (loading.headlines === true) {
         loadHeadlines(pageNumber);
@@ -246,7 +252,7 @@ function watchMoreStories(categorySelected, query ) {
       else if ( loading.news === true ) {
         getNews(query, pageNumber);
       }
-    })
+    });
   }
 }
 
@@ -261,7 +267,7 @@ async function loadHeadlines(pageNumber){
     pageSize: 12,
     page: pageNumber
     };
-  const queryString = await formatQueryParams(params)
+  const queryString = await formatQueryParams(params);
   const url = headlinesUrl + '?' + queryString;
   const options = {
     headers: new Headers({
@@ -277,7 +283,7 @@ async function loadHeadlines(pageNumber){
     .then(function (responseJson){
       displayResults(responseJson, pageNumber);
       mostRecentJson = responseJson;
-      return mostRecentJson
+      return mostRecentJson;
     })
     .catch( err => {
       $('.error-message').text(`Something in loadHeadlines went wrong: ${err.message}`);
@@ -286,7 +292,7 @@ async function loadHeadlines(pageNumber){
   return pageNumber;
 }
 
-async function loadSpecificHeadlines(categorySelected, pageNumber){
+async function loadSpecificHeadlines(categorySelected, pageNumber) {
   $('.search-parameter').html(`${categorySelected}`);
   loading.sheadlines = true;
   loading.headlines = false;
@@ -298,7 +304,7 @@ async function loadSpecificHeadlines(categorySelected, pageNumber){
     page: pageNumber,
     category: categorySelected,
     };
-  const queryString = await formatQueryParams(params)
+  const queryString = await formatQueryParams(params);
   const url = specificHeadlinesUrl + '?' + queryString;
   const options = {
     headers: new Headers({
@@ -314,7 +320,7 @@ async function loadSpecificHeadlines(categorySelected, pageNumber){
     .then(function(responseJson) {
       displayResults(responseJson, pageNumber);
       mostRecentJson = responseJson;
-      return mostRecentJson
+      return mostRecentJson;
     })
     .catch( err => {
       $('.error-message').text(`Something in loadSpecificHeadlines went wrong: ${err.message}`);
@@ -334,7 +340,7 @@ async function getNews(query, pageNumber) {
     pageSize: 12,
     page: pageNumber
   };
-  const queryString = await formatQueryParams(params)
+  const queryString = await formatQueryParams(params);
   const url = searchURL + '?' + queryString;
   const options = {
     headers: new Headers({
@@ -350,7 +356,7 @@ async function getNews(query, pageNumber) {
     .then( function(responseJson) {
       displayResults(responseJson, pageNumber, query);
       mostRecentJson = responseJson;
-      return mostRecentJson
+      return mostRecentJson;
     })
     .catch( err => {
       $('.error-message').text(`Something went wrong: ${err.message}`);
@@ -359,27 +365,27 @@ async function getNews(query, pageNumber) {
 }
 
 function watchBreaksSelector() {
-  let breaksSelector = $('.break-options').val();
-  if ( breaksSelector === 'all') {
+  let $breaksSelector = $('.break-options').val();
+  if ( $breaksSelector === 'all') {
     for ( let i = 0; i < STORE.length; i++) {
       STORE[i].get = true;
     }
   }
-  else if ( breaksSelector === 'cats') {
+  else if ( $breaksSelector === 'cats') {
     STORE[0].get = true;
     let current = STORE[0];
     let storeWithoutCurrent = STORE.filter( function(x) {
-      return x !== current
+      return x !== current;
     });
     for ( let i = 0; i < storeWithoutCurrent.length; i++) {
       storeWithoutCurrent[i].get = false;
     }
   }
-  else if ( breaksSelector === 'ron') {
+  else if ( $breaksSelector === 'ron') {
     STORE[1].get = true;
     let current = STORE[1];
     let storeWithoutCurrent = STORE.filter( function(x) {
-      return x !== current
+      return x !== current;
     });
     for ( let i = 0; i < storeWithoutCurrent.length; i++) {
       storeWithoutCurrent[i].get = false;
@@ -392,7 +398,7 @@ function watchBreaksChange(responseJson) {
   $('.break-options').change(function() {
     watchBreaksSelector();
     displayResults(mostRecentJson, pageNumber);
-  })
+  });
 }
 $(watchBreaksChange());
 $(checkScreenSize(underTabletSize, desktopSize));
