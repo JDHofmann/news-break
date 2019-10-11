@@ -44,17 +44,19 @@ function removeSignIn() {
 
 // SEARCH BAR POPS OUT FOR FOR MOBILE
 
-const desktopSize = window.matchMedia("(min-width: 820px)");
-const underTabletSize = window.matchMedia("(max-width: 767px)");
+const largeSize = window.matchMedia("(min-width: 820px)");
+const smallSize = window.matchMedia("(max-width: 767px)");
 
-function checkScreenSize(underTabletSize, desktopSize) {
-  if (underTabletSize.matches) { // If media query matches
+function checkScreenSize(smallSize, largeSize) {
+  if (smallSize.matches) { // If media query matches
     mobileMenu = true;
-    return mobileMenu;
+    desktopMenu = false;
+    return mobileMenu, desktopMenu;
   }
-  else if (desktopSize.matches) {
+  else if (largeSize.matches) {
     desktopMenu = true;
-    return desktopMenu;
+    mobileMenu = false;
+    return mobileMenu, desktopMenu;
   }
   else {
     mobileMenu = false;
@@ -105,7 +107,7 @@ function toggleSearchStatus() {
 function watchForm(mobileMenu) {
   $('form').submit( event => {
     event.preventDefault();
-    removeMenu();
+    //removeMenu();
     resetPageNumber();
     let $searchTerm = $('.search-input').val();
     getNews($searchTerm, pageNumber);
@@ -124,35 +126,39 @@ function watchMenu() {
     event.stopPropagation();
     event.preventDefault();
     displayMenu();
-    //closeMenu();
   });
 }
 function closeMenu() {
   $('.close-menu').on('click', function(event) {
     event.preventDefault();
-    removeMenu();
+    checkScreenSize(smallSize, largeSize);
+    removeMenu(desktopMenu);
   });
   $('.nav-mask').on('click', function(event) {
-    removeMenu();
+    checkScreenSize(smallSize, largeSize);
+    removeMenu(desktopMenu);
   });
   $(document).keyup( function(e) {
      if (e.key === "Escape") {
-       removeMenu();
+       checkScreenSize(smallSize, largeSize);
+       removeMenu(desktopMenu);
      }
   });
 }
 function displayMenu() {
   $('.nav-list').css('left', '0');
-  $('.menu-btn').css('display', 'none');
-  $('.close-menu').css('display', 'block');
+  $('.menu-btn').addClass('hidden');
+  $('.close-menu').removeClass('hidden');
   $('.nav-mask').css('display', 'block');
   $('.top').focus();
 }
-function removeMenu() {
+function removeMenu(desktopMenu) {
+  if ( desktopMenu === false ) {
     $('.nav-list').css('left', '-80vw');
     $('.nav-mask').css('display', 'none');
-    $('.close-menu').css('display', 'none');
-    $('.menu-btn').css('display', 'block');
+    $('.close-menu').addClass('hidden');
+    $('.menu-btn').removeClass('hidden');
+  }
 }
 
 /* HEADLINES LINKS */
@@ -427,7 +433,7 @@ function watchBreaksChange(responseJson) {
 // ON LOAD
 
 $(watchBreaksChange());
-$(checkScreenSize(underTabletSize, desktopSize));
+$(checkScreenSize(smallSize, largeSize));
 $(watchMenu());
 $(closeMenu());
 $(loadHeadlines(pageNumber));
