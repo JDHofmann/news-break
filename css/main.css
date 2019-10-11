@@ -12,27 +12,31 @@ body {
   font-family: 'Montserrat', sans-serif;
   line-height: 1;
 }
-
+.hidden {
+  display: none;
+}
 /* SMALL SIZING */
 
 /* HEADER */
 header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  /* align-items: center; */
   grid-gap:0 .5em;
   box-shadow: 3px 2px 6px #858585;
   height: 3em;
 }
-.header-mask {
-  display: none;
-}
-form {
+.search-bar {
   display: grid;
-  grid-column: 6/8;
   height: 3em;
-  grid-template-columns: 1fr 1fr;
   grid-gap: .5em .3em;
+}
+.grid1 {
+  grid-column: 6/8;
+  grid-template-columns: 1fr 1fr;
+}
+.grid2 {
+  grid-column: 2/8;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 input {
   background-color: #fff;
@@ -42,25 +46,21 @@ input {
 }
 
 .logo {
-  display: inline;
   grid-column: 3/6;
   font-size: 1.25em;
   color: #ff4040;
   letter-spacing: 3px;
-  /* text-shadow: .05em .025em .025em #c9c9c9; */
   margin: .75em auto;
   height: auto;
 
 }
 .back-btn {
   grid-column: 1/2;
-  display: none;
   background-color: #fff;
   margin: auto;
 }
 .search-input {
-  grid-column: 1/2;
-  display: none;
+  grid-column: 2/6;
   background-color: #ededed;
   padding: 0 1em;
   font-size: 1em;
@@ -86,6 +86,7 @@ input {
 .menu-btn {
   background-image: url(img/burgermenu2.png);
   background-color: #fff;
+  z-index: 52;
 }
 .menu-btn, .close-menu {
   background-repeat: no-repeat;
@@ -99,29 +100,36 @@ input {
   transition: all .5s ease;
 }
 .close-menu {
-  z-index: 51;
-  display: none;
+  z-index: 53;
   font-size: 1em;
   color: #545454;
   text-align: center;
-  /* width: 90%; */
   width: 70%;
   margin-left: .4em;
   border: 1px #111;
   background-color: #ededed;
 }
+.nav-mask {
+  z-index: 50;
+  position: fixed;
+  top: 4;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0, 0.3);
+}
 .nav-list {
   z-index: 51;
   position: fixed;
   top: 3em;
-  left: -80vw;
+  left: 0;
   border-radius: 0 0 10px 0;
   box-shadow: 3px 3px 3px #858585;
   background-color: #fff;
   width: 60vw;
   height: auto;
   padding: 1em 2em;
-  transition: .7s;
+  transition: .5s;
 }
 .menu-item {
   margin: 1em .75em;
@@ -151,16 +159,7 @@ input {
   box-shadow: 2px 2px 2px #c9c9c9;
   padding: .2em;
 }
-.nav-mask {
-  z-index: 50;
-  display: none;
-  position: fixed;
-  top: 4;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(0, 0, 0, 0.3);
-}
+
 /* SIGN IN FORM */
 
 .sign-in-mask {
@@ -182,7 +181,6 @@ input {
   z-index: 101;
   width: 80%;
   height: auto;
-  /* margin: 10%; */
   background-color: #fff;
   border: 1.5px solid #858585;
   border-radius: 10px;
@@ -257,16 +255,6 @@ input {
 
 /* RESULTS */
 
-.theme {
-  text-align: center;
-  font-size: 1em;
-  padding: .7em;
-  letter-spacing: .1em;
-  font-style: italic;
-  /* color: #5e5e5e; */
-  color: #ff4040;
-  font-family: monospace;
-}
 .search-parameter {
   padding: 1em;
   color: #00A7A7;
@@ -336,11 +324,9 @@ a {
 
 @media only screen and (min-width: 768px) {
   header {
-    /* height: 4.5em; */
     height: 3.5em;
     position: fixed;
     background-color: #fff;
-    /* background-color: #00A7A7; */
     width: 100%;
   }
   nav {
@@ -360,7 +346,7 @@ a {
     grid-column: 2/4;
     margin: 1em auto;
   }
-  form {
+  .search-bar {
     grid-column: 4/8;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     height: 3.5em;
@@ -442,16 +428,20 @@ a {
     grid-column: 1/3;
     margin: 1.25em auto;
   }
-  form {
+  .search-bar {
     height: 4em;
   }
   .search-input, .search {
     margin: .25em auto;
   }
+  .search {
+    grid-column: 4/5;
+  }
 
   /* NAV BOX */
 
   .nav-list {
+    display: block;
     position: fixed;
     left: 1em;
     top: 5em;
@@ -462,9 +452,6 @@ a {
     height: auto;
     padding: 2em;
     margin-top: 1em;
-  }
-  .menu-logo {
-    display: none;
   }
   .menu-top {
     margin-top: 2.5em;
