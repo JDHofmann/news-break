@@ -20,8 +20,7 @@ let loading = {
 /* SIGN IN POP UP */
 
 $('.account-sign-in').on('click', function(event) {
-  $('.sign-in-mask').css('display','block');
-  $('.sign-in').css('display','block');
+  $('.sign-in-mask, .sign-in').css('display', 'block');
   signInOpen = true;
   watchSignIn();
 });
@@ -32,14 +31,13 @@ function watchSignIn() {
      if (e.key === "Escape") {
        removeSignIn();
     }
-});
+  });
 }
 $('.submit').on('click', e => removeSignIn());
 $('.sign-in-mask').on('click', e => removeSignIn());
 
 function removeSignIn() {
-  $('.sign-in-mask').css('display','none');
-  $('.sign-in').css('display','none');
+  $('.sign-in-mask, .sign-in').css('display', 'none');
 }
 
 // SEARCH BAR POPS OUT FOR FOR MOBILE
@@ -72,23 +70,17 @@ $('.search').on('click', function(event) {
   }
 });
 function enableSearchBar() {
-  $('.logo').css('display', 'none');
-  $('form').css('grid-column', '2/8');
-  $('form').css('grid-template-columns', '1fr 1fr 1fr 1fr 1fr 1fr');
-  $('.search-input').css('grid-column', '2/6');
-  $('.back-btn').css('display', 'block');
-  $('.search-input').css('display', 'block');
+  $('.logo').addClass('hidden');
+  $('.search-bar').removeClass('grid1').addClass('grid2');
+  $('.search-input, .back-btn').removeClass('hidden');
   $('.search').css('grid-column', '6/7');
   toggleSearchStatus();
 }
 function disableSearchBar() {
-  $('.search-input').css('display', 'none');
-  $('.back-btn').css('display', 'none');
-  $('form').css('grid-template-columns', '1fr 1fr');
-  $('form').css('grid-column', '6/8');
+  $('.search-input, .back-btn').addClass('hidden');
   $('.search').css('grid-column', '2/3');
-  $('.logo').css('display', 'block');
-  $('.menu-btn').css('display', 'block');
+  $('.search-bar').removeClass('grid2').addClass('grid1');
+  $('.logo').removeClass('hidden');
   toggleSearchStatus();
 }
 function toggleSearchStatus() {
@@ -146,17 +138,13 @@ function closeMenu() {
   });
 }
 function displayMenu() {
-  $('.nav-list').css('left', '0');
   $('.menu-btn').addClass('hidden');
-  $('.close-menu').removeClass('hidden');
-  $('.nav-mask').css('display', 'block');
+  $('.close-menu, .nav-list, .nav-mask').removeClass('hidden');
   $('.top').focus();
 }
 function removeMenu(desktopMenu) {
   if ( desktopMenu === false ) {
-    $('.nav-list').css('left', '-80vw');
-    $('.nav-mask').css('display', 'none');
-    $('.close-menu').addClass('hidden');
+    $('.close-menu, .nav-list, .nav-mask').addClass('hidden');
     $('.menu-btn').removeClass('hidden');
   }
 }

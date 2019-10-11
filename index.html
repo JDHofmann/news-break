@@ -11,10 +11,9 @@
 <body>
   <header>
     <nav>
-      <button class="close-menu hidden" type="button" aria-label="close the menu">X</button>
-
       <button class="menu-btn" type="button" aria-label="open the menu"></button>
-      <ul class="nav-list">
+      <button class="close-menu hidden" type="button" aria-label="close the menu">X</button>
+      <ul class="nav-list hidden">
         <li class="menu-item top">Top Headlines</li>
         <li class="menu-item business">Business</li>
         <li class="menu-item technology">Technology</li>
@@ -43,12 +42,12 @@
         </li>
         <li><div class="sign-in-mask"></div></li>
       </ul>
-      <div class="nav-mask"></div>
+      <div class="nav-mask hidden"></div>
     </nav>
     <h2 class="logo"> News <span>Break</span></h2>
-    <form role="search">
-        <button class="back-btn" type="button" name="button">&#8592;</button>
-        <input type="text" name="search-term" class="search-input">
+    <form class="search-bar grid1"role="search">
+        <button class="back-btn hidden" type="button" name="button">&#8592;</button>
+        <input type="text" name="search-term" class="search-input hidden">
         <button class="search" type="submit" value="" aria-label="search"></button>
     </form>
   </header>
