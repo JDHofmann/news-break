@@ -124,7 +124,7 @@ function watchMenu() {
     event.stopPropagation();
     event.preventDefault();
     displayMenu();
-    closeMenu();
+    //closeMenu();
   });
 }
 function closeMenu() {
@@ -149,12 +149,10 @@ function displayMenu() {
   $('.top').focus();
 }
 function removeMenu() {
-  if ( desktopMenu === false) {
     $('.nav-list').css('left', '-80vw');
     $('.nav-mask').css('display', 'none');
     $('.close-menu').css('display', 'none');
     $('.menu-btn').css('display', 'block');
-  }
 }
 
 /* HEADLINES LINKS */
@@ -431,6 +429,7 @@ function watchBreaksChange(responseJson) {
 $(watchBreaksChange());
 $(checkScreenSize(underTabletSize, desktopSize));
 $(watchMenu());
+$(closeMenu());
 $(loadHeadlines(pageNumber));
 $(watchForm(mobileMenu));
 $('.nav').focus();
