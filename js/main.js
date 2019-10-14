@@ -9,7 +9,7 @@ let breakSelected, categorySelected, mostRecentJson, pageNumber = 1;
 
 let toggleCat, toggleRon, areThereMoreStories = true;
 
-let mobileMenu, desktopMenu, signInOpen, isSearchBarEnabled = false;
+let mobileMenu, desktopMenu, signInOpen,  isSearchBarEnabled = false;
 
 let loading = {
   'headlines':false,
@@ -54,35 +54,32 @@ function checkScreenSize(smallSize, largeSize) {
   else if (largeSize.matches) {
     desktopMenu = true;
     mobileMenu = false;
-    return mobileMenu, desktopMenu;
+    return  mobileMenu, desktopMenu;
   }
   else {
     mobileMenu = false;
     desktopMenu = false;
-    return mobileMenu, desktopMenu;
+    return  mobileMenu, desktopMenu;
   }
 }
 $('.back-btn').on('click', e => disableSearchBar());
-$('.search').on('click', function(event) {
-  if ( isSearchBarEnabled === false && mobileMenu === true ) {
+$('.open-search').on('click', function(event) {
     event.preventDefault();
     enableSearchBar();
-  }
 });
 function enableSearchBar() {
-  $('.logo').addClass('hidden');
+  $('.logo, .open-search').addClass('hidden');
   $('.search-bar').removeClass('grid1').addClass('grid2');
   $('.search-input, .back-btn').removeClass('hidden');
-  $('.search').css('grid-column', '6/7');
-  toggleSearchStatus();
+  $('.search').removeClass('hidden');
 }
 function disableSearchBar() {
   $('.search-input, .back-btn').addClass('hidden');
-  $('.search').css('grid-column', '2/3');
+  $('.search').addClass('hidden');
   $('.search-bar').removeClass('grid2').addClass('grid1');
-  $('.logo').removeClass('hidden');
-  toggleSearchStatus();
+  $('.logo, .open-search').removeClass('hidden');
 }
+/*
 function toggleSearchStatus() {
   if ( isSearchBarEnabled === false ) {
     isSearchBarEnabled = true;
@@ -93,21 +90,17 @@ function toggleSearchStatus() {
     return isSearchBarEnabled;
   }
 }
-
+*/
 // FORM SUBMISSION FOR SEARCH
 
-function watchForm(mobileMenu) {
+function watchForm() {
   $('form').submit( event => {
     event.preventDefault();
-    //removeMenu();
     resetPageNumber();
     let $searchTerm = $('.search-input').val();
     getNews($searchTerm, pageNumber);
     $('.search-input').val('');
-    if ( mobileMenu === true ) {
       disableSearchBar();
-    }
-    else {}
   });
 }
 
@@ -141,11 +134,13 @@ function displayMenu() {
   $('.menu-btn').addClass('hidden');
   $('.close-menu, .nav-list, .nav-mask').removeClass('hidden');
   $('.top').focus();
+  $('header').addClass('fixed');
 }
 function removeMenu(desktopMenu) {
   if ( desktopMenu === false ) {
     $('.close-menu, .nav-list, .nav-mask').addClass('hidden');
     $('.menu-btn').removeClass('hidden');
+    $('header').removeClass('fixed');
   }
 }
 
@@ -155,39 +150,40 @@ $('.top').on('click', function(event) {
   categorySelected = 'Top Headlines';
   resetPageNumber();
   loadHeadlines(pageNumber);
-  removeMenu();
+  checkScreenSize(smallSize, largeSize);
+  removeMenu(desktopMenu);
 });
 
 $('.business').on('click', function(event) {
   categorySelected = 'Business';
-  resetPageNumber();
-  loadSpecificHeadlines(categorySelected, pageNumber);
-  removeMenu();
+  headlineHyperLink(categorySelected);
 });
 $('.technology').on('click', function(event) {
   categorySelected = 'Technology';
-  resetPageNumber();
-  loadSpecificHeadlines(categorySelected, pageNumber);
-  removeMenu();
+  headlineHyperLink(categorySelected);
+
 });
 $('.health').on('click', function(event) {
   categorySelected = 'Health';
-  resetPageNumber();
-  loadSpecificHeadlines(categorySelected, pageNumber);
-  removeMenu();
+  headlineHyperLink(categorySelected);
+
 });
 $('.sports').on('click', function(event) {
   categorySelected = 'Sports';
-  resetPageNumber();
-  loadSpecificHeadlines(categorySelected, pageNumber);
-  removeMenu();
+  headlineHyperLink(categorySelected);
+
 });
 $('.entertainment').on('click', function(event) {
   categorySelected = 'Entertainment';
+  headlineHyperLink(categorySelected);
+});
+
+function headlineHyperLink(categorySelected) {
   resetPageNumber();
   loadSpecificHeadlines(categorySelected, pageNumber);
-  removeMenu();
-});
+  checkScreenSize(smallSize, largeSize);
+  removeMenu(desktopMenu);
+}
 
 // NEWS FETCH
 
@@ -425,5 +421,5 @@ $(checkScreenSize(smallSize, largeSize));
 $(watchMenu());
 $(closeMenu());
 $(loadHeadlines(pageNumber));
-$(watchForm(mobileMenu));
+$(watchForm(/* mobileMenu */));
 $('.nav').focus();
