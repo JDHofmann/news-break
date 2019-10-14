@@ -79,18 +79,7 @@ function disableSearchBar() {
   $('.search-bar').removeClass('grid2').addClass('grid1');
   $('.logo, .open-search').removeClass('hidden');
 }
-/*
-function toggleSearchStatus() {
-  if ( isSearchBarEnabled === false ) {
-    isSearchBarEnabled = true;
-    return isSearchBarEnabled;
-  }
-  else {
-    isSearchBarEnabled = false;
-    return isSearchBarEnabled;
-  }
-}
-*/
+
 // FORM SUBMISSION FOR SEARCH
 
 function watchForm() {
@@ -421,5 +410,5 @@ $(checkScreenSize(smallSize, largeSize));
 $(watchMenu());
 $(closeMenu());
 $(loadHeadlines(pageNumber));
-$(watchForm(/* mobileMenu */));
+$(watchForm(mobileMenu));
 $('.nav').focus();

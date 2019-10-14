@@ -62,7 +62,6 @@ input {
   margin: .05em auto;
   height: auto;
   white-space: nowrap;
-  font-family: 'Cabin Sketch', cursive;
 }
 .back-btn {
   grid-column: 1/2;
