@@ -67,6 +67,6 @@ function displayCatResults(catJson) {
 function displayRonResults(json) {
   $('.results-list').append(
     `<li><div class='alternate-container'><div class="Swanson Container">
-    </div><h4 aria-label="Quote from Ron Swanson" class="ron-quote">${json}</h4></div><li>`
+    </div><h4 aria-label="Ron Swanson Quote: ${json}" class="ron-quote">${json}</h4></div><li>`
   );
 }
